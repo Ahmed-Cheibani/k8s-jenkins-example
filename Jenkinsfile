@@ -4,15 +4,10 @@ pipeline {
         NAME = "${env.BRANCH_NAME == "master" ? "example" : "example-staging"}"
         VERSION = readMavenPom().getVersion()
         DOMAIN = 'localhost'
-        REGISTRY = 'davidcampos/k8s-jenkins-example'
-        REGISTRY_CREDENTIAL = 'dockerhub-davidcampos'
+        REGISTRY = 'ahmedcheibani/k8s-jenkins-example'
+        REGISTRY_CREDENTIAL = 'docker_hub_login'
     }
-    agent {
-        kubernetes {
-            defaultContainer 'jnlp'
-            yamlFile 'build.yaml'
-        }
-    }
+    agent any
     stages {
         stage('Build') {
             steps {
